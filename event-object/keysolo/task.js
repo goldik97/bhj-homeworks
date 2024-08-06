@@ -28,13 +28,13 @@ class Game {
     document.addEventListener('keyup', (e) => {
       if(e.key === 'Shift') {
         return;
-      }
+      };
 
       if(e.key === this.currentSymbol.innerHTML) {
         this.success();
       }
       else {
-        this.fail;
+        this.fail();
       }
     })
   }
