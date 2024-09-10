@@ -15,10 +15,12 @@ function changeValue(event) {
     let count = +value.innerText;
 
     if(event.target.classList.contains('product__quantity-control_inc')) {
-        value.innerText = Number(value.innerText) + 1;
+        count++;
+        value.innerText = count;
     }
     else if(count > 1) {
-        value.innerText = Number(value.innerText) - 1;
+        count--;
+        value.innerText = count;
     }
 }
 
@@ -37,10 +39,12 @@ function addToCart(event) {
             return false;
         }
     }
-    const productImg = product.querySelector('product__img').src;
-    const count = product.querySelector('product__quantity-value').innerText;
+    const productImg = product.querySelector('.product__image').getAttribute('src');
+    const count = product.querySelector('.product__quantity-value').innerText;
+
     const productToCart = `<div class="cart__product" data-id="${id}">
                            <img class="cart__product-image" src="${productImg}">
                            <div class="cart__product-count">${count}</div>`;
+
     cart.insertAdjacentHTML("beforeend", productToCart);
 }

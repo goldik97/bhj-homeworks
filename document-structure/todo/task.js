@@ -3,8 +3,7 @@ const taskList = document.getElementById('tasks__list');
 const buttonAdd = document.getElementById('tasks__add');
 
 function addTask(event) {
-    if(taskInput.value) {
-        event.preventDefault();
+    if(taskInput.value.trim().length > 0) {
         taskList.insertAdjacentHTML("beforeend", `
             <div class="task">
             <div class="task__title">
@@ -15,6 +14,8 @@ function addTask(event) {
 
             taskInput.value = '';
     }
+    
+    event.preventDefault();
 }
 
 buttonAdd.addEventListener('click', addTask);
