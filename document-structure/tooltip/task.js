@@ -12,6 +12,16 @@ tooltips.forEach((hasTooltip, i) => {
     }
 
     tooltip.textContent = hasTooltip.title;
+    
+    const coordinates = hasTooltip.getBoundingClientRect();
+
+    const top = coordinates.top + window.scrollY;
+    const left = coordinates.left + window.scrollX;
+    
+    tooltip.style.top = top + coordinates.height + 'px';
+    tooltip.style.left = left + 'px';
+
     tooltip.classList.add('tooltip_active');
+
     })
 })

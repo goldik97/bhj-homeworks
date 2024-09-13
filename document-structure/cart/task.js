@@ -26,25 +26,22 @@ function changeValue(event) {
 
 
 function addToCart(event) {
+    const cards = Array.from(cart.querySelectorAll('.cart__product'))
     const product = event.target.closest('.product');
     const id = product.dataset.id;
     const countForProduct = +event.target.parentNode.querySelector('.product__quantity-value').innerText;
+    const productInCard = cards.find((elem => elem.dataset.id === id));
+
+    if(productInCard) {
+        let totalCount = Number(productInCard.querySelector('.cart__product-count').innerText) + countForProduct;
+        productInCard.querySelector('.cart__product-count').innerText = totalCount;
+    } else {const productImg = product.querySelector('.product__image').getAttribute('src');
+        const count = product.querySelector('.product__quantity-value').innerText;
     
-    for(let item of cart.children) {
-        if(item.dataset.id === id) {
-            let productCount = item.querySelector('.cart__product-count');
-            let total = +productCount.innerText;
-            productCount.innerText = total + countForProduct;
-
-            return false;
+        cart.innerHTML += `<div class="cart__product" data-id="${id}">
+                               <img class="cart__product-image" src="${productImg}">
+                               <div class="cart__product-count">${count}</div>`;
         }
-    }
-    const productImg = product.querySelector('.product__image').getAttribute('src');
-    const count = product.querySelector('.product__quantity-value').innerText;
-
-    const productToCart = `<div class="cart__product" data-id="${id}">
-                           <img class="cart__product-image" src="${productImg}">
-                           <div class="cart__product-count">${count}</div>`;
-
-    cart.insertAdjacentHTML("beforeend", productToCart);
+    
+        return false;
 }
